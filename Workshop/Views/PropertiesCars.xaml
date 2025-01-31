@@ -1,0 +1,39 @@
+﻿<Window x:Class="Workshop.Views.PropertiesCars"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Workshop.Views"
+        mc:Ignorable="d"
+        Title="PropertiesCars" Height="300" Width="auto">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Content="Marka    :" Grid.Row="0" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Content="Model    :" Grid.Row="1" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Content="Rok prod.:" Grid.Row="2" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Content="Imię     :" Grid.Row="3" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Content="Nazwisko :" Grid.Row="4" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+
+        <Button Content="Zamknij" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="10,20,350,20" Grid.Column="1" Grid.Row="8" FontSize="20"/>
+        <Button Content="Zapisz" Command="{Binding SaveCommand}" Margin="350,20,10,20" Grid.Column="1" Grid.Row="8" FontSize="20"/>
+
+        <TextBox x:Name="brand" Grid.Column="1" Grid.Row="0" FontSize="30" Text="{Binding PropSelectedCar.Brand, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="model" Grid.Column="1" Grid.Row="1" FontSize="30" Text="{Binding PropSelectedCar.Model, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="year" Grid.Column="1" Grid.Row="2" FontSize="30" Text="{Binding PropSelectedCar.Year, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="firstName" Grid.Column="1" Grid.Row="3" FontSize="30" Text="{Binding PropSelectedCar.OwnerName, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="lastName" Grid.Column="1" Grid.Row="4" FontSize="30" Text="{Binding PropSelectedCar.OwnerLastName, UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</Window>

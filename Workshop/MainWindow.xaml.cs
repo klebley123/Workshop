@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Workshop.ViewModel;
 
 namespace Workshop
 {
@@ -23,6 +25,22 @@ namespace Workshop
         public MainWindow()
         {
             InitializeComponent();
+            ConnectToDatabase();
+            DataContext = new MainViewModel();
         }
+
+        private void ConnectToDatabase()
+        {
+            string connetionString;
+            SqlConnection connection;                             //   
+            connetionString = @"Data Source=LAPTOP-RJLJ2K5G;Initial Catalog=Workshop; Integrated Security=True; User ID=sa;Password=haslo";
+            connection = new SqlConnection(connetionString);
+            connection.Open();
+            MessageBox.Show("Connection Open  !");
+            connection.Close();
+        }
+        //TO DO ==================================================================
+        //wyswietlanie drugiego okna zrobione zrób jeszcze obsługę przycisku wstecz w drugim oknie 
+        //obsługę bazy danych wyświetlenia danych z bazy w pierwszym oknie 
     }
 }
