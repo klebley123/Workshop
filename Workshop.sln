@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop", "Workshop\Workshop.csproj", "{F7E87A7C-5164-4F25-A6A4-0DA75C89F334}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopWebApi", "WorkshopWebApi\WorkshopWebApi.csproj", "{9675D0FE-4AAE-4E9E-ABC3-5F4CF3B3C767}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F7E87A7C-5164-4F25-A6A4-0DA75C89F334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7E87A7C-5164-4F25-A6A4-0DA75C89F334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7E87A7C-5164-4F25-A6A4-0DA75C89F334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9675D0FE-4AAE-4E9E-ABC3-5F4CF3B3C767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9675D0FE-4AAE-4E9E-ABC3-5F4CF3B3C767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9675D0FE-4AAE-4E9E-ABC3-5F4CF3B3C767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9675D0FE-4AAE-4E9E-ABC3-5F4CF3B3C767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,46 @@
+﻿<Window x:Class="Workshop.Views.ServiceOrderView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Zgłoszenie do serwisu" Height="auto" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Nagłówki -->
+            <RowDefinition Height="auto" />
+            <!-- DataGrid -->
+            <RowDefinition Height="Auto" />
+            <!-- Formularz zgłoszenia -->
+            <RowDefinition Height="Auto" />
+            <!-- Przyciski -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Text="Zgłoszenie serwisowe" FontSize="20" HorizontalAlignment="Center" FontWeight="Bold" Grid.Row="0" Margin="0,0,0,10" />
+
+        <!-- DataGrid z wybranym samochodem -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding SelectedCarAsList}" AutoGenerateColumns="True"
+                  IsReadOnly="True" Margin="0,0,0,10"  Height="60"/>
+
+        <!-- Formularz zgłoszenia -->
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0,10,0,10">
+            <TextBlock Text="Data rozpoczęcia:" Margin="0,0,0,5" />
+            <DatePicker SelectedDate="{Binding ServiceStartDate}" />
+
+            <TextBlock Text="Planowana data zakończenia:" Margin="0,10,0,5" />
+            <DatePicker SelectedDate="{Binding PlannedEndDate}" />
+
+            <TextBlock Text="Opis serwisu:" Margin="0,10,0,5" />
+            <TextBox Text="{Binding ServiceDescription}" AcceptsReturn="True" Height="60" />
+        </StackPanel>
+
+        <!-- Przyciski -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Zapisz" Command="{Binding SaveServiceOrderCommand}" Width="100" Margin="0,0,10,0" />
+            <Button Content="Anuluj" Command="{Binding CancelCommand}" Width="100" />
+        </StackPanel>
+    </Grid>
+</Window>
+

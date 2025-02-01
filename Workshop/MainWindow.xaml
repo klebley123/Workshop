@@ -1,12 +1,40 @@
 ﻿<Window x:Class="Workshop.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Workshop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Warsztat Samochodowy" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Pole wyszukiwania -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="4">
+            <Label Content="Szukaj:" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="4,0,0,0"/>
+        </StackPanel>
+
+        <!-- DataGrid dla samochodów -->
+        <DataGrid ItemsSource="{Binding FilteredCars}" SelectedItem="{Binding SelectedCar}" 
+                  AutoGenerateColumns="True" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="4"/>
+
+        <!-- DataGrid dla zgłoszeń serwisowych -->
+        <DataGrid ItemsSource="{Binding ServiceOrders}" AutoGenerateColumns="True" 
+                  Grid.Column="2" Grid.Row="2" Margin="4"/>
+
+        <!-- Przyciski akcji -->
+        <Button Content="Nowy klient" Grid.Row="0" Grid.Column="0" FontSize="20" Command="{Binding OpenAddCarWindowCommand}"/>
+        <Button Content="Właściwości" Grid.Row="0" Grid.Column="1" FontSize="20" Command="{Binding OpenPropertiesCarWindowCommand}"/>
+        <Button Content="Zgłoś serwis" Grid.Row="0" Grid.Column="2" FontSize="20" Command="{Binding OpenServiceOrderWindowCommand}"/>
     </Grid>
 </Window>
