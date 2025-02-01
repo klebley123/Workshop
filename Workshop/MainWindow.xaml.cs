@@ -25,14 +25,33 @@ namespace Workshop
     {
         public MainWindow()
         {
+            //var loginWindow = new LoginView();
+            //if (loginWindow.ShowDialog() == true)
+            //{
+            //    Application.Current.Shutdown();
+            //}
+            //InitializeComponent();
+            //ConnectToDatabase();
+            //DataContext = new MainViewModel();
+           
+
             var loginWindow = new LoginView();
-            if (loginWindow.ShowDialog() == true)
+            bool? loginResult = loginWindow.ShowDialog(); //Pobieramy wynik logowania
+            Console.WriteLine($"Wynik logowania przed sprawdzeniem: {loginResult}");
+            Console.WriteLine($"Wynik logowania: {loginResult}");
+
+            if (loginResult == true) // Jeśli logowanie zakończyło się sukcesem
             {
-                Application.Current.Shutdown();
+                Console.WriteLine("Logowanie udane! Otwieram MainWindow...");
+                InitializeComponent();
+                ConnectToDatabase();
+                DataContext = new MainViewModel();
             }
-            InitializeComponent();
-            ConnectToDatabase();
-            DataContext = new MainViewModel();
+            else
+            {
+                Console.WriteLine("Logowanie nieudane. Zamykam aplikację...");
+                Application.Current?.Shutdown();  // Zamykamy aplikację, jeśli logowanie nie było udane
+            }
         }
 
         private void ConnectToDatabase()
