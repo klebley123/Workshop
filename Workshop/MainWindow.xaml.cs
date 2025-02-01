@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Workshop.ViewModel;
+using Workshop.Views;
 
 namespace Workshop
 {
@@ -24,6 +25,11 @@ namespace Workshop
     {
         public MainWindow()
         {
+            var loginWindow = new LoginView();
+            if (loginWindow.ShowDialog() == true)
+            {
+                Application.Current.Shutdown();
+            }
             InitializeComponent();
             ConnectToDatabase();
             DataContext = new MainViewModel();

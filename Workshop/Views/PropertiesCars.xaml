@@ -27,9 +27,10 @@
         <Label Content="Nazwisko :" Grid.Row="4" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
 
-        <Button Content="Zamknij" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="10,20,350,20" Grid.Column="1" Grid.Row="8" FontSize="20"/>
+        <Button Content="Usuń" Command="{Binding DeleteCarCommand}" Margin="10,20,350,20" Grid.Column="1" Grid.Row="8" FontSize="20"/>
         <Button Content="Zapisz" Command="{Binding SaveCommand}" Margin="350,20,10,20" Grid.Column="1" Grid.Row="8" FontSize="20"/>
-
+        <Button Content="Zamknij" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="10,20,10,20" Grid.Column="0" Grid.Row="6" FontSize="20"/>
+        
         <TextBox x:Name="brand" Grid.Column="1" Grid.Row="0" FontSize="30" Text="{Binding PropSelectedCar.Brand, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="model" Grid.Column="1" Grid.Row="1" FontSize="30" Text="{Binding PropSelectedCar.Model, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="year" Grid.Column="1" Grid.Row="2" FontSize="30" Text="{Binding PropSelectedCar.Year, UpdateSourceTrigger=PropertyChanged}"/>

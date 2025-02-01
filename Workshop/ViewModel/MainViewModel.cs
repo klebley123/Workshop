@@ -19,7 +19,7 @@ namespace Workshop.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly ApiService _apiService;
+        public ApiService _apiService;
 
         private string _searchText;
         private Car _selectedCar;
@@ -106,13 +106,13 @@ namespace Workshop.ViewModel
             }
         }
 
-        private void LoadCarsFromDatabase()
+        public async Task LoadCarsFromDatabase()
         {
             try
             {
                 using (var context = new WorkshopContext())
                 {
-                    var carsFromDb = context.Cars.ToList();
+                    var carsFromDb = context.Cars.Where(c => !c.IsDeleted).ToList(); // Pominięcie usuniętych rekordów
                     Cars.Clear();
                     foreach (var car in carsFromDb)
                     {
@@ -126,6 +126,8 @@ namespace Workshop.ViewModel
                 MessageBox.Show($"Błąd podczas ładowania danych: {ex.Message}");
             }
         }
+
+
 
         private void FilterCars()
         {
@@ -169,15 +171,16 @@ namespace Workshop.ViewModel
         {
             if (SelectedCar != null)
             {
-                var editWindow = new PropertiesCars(SelectedCar);
+                var editWindow = new PropertiesCars(SelectedCar, this); // Przekazanie MainViewModel
                 bool? result = editWindow.ShowDialog();
 
                 if (result == true)
                 {
-                    LoadCarsFromDatabase(); // Odśwież dane po edycji
+                    LoadCarsFromDatabase(); // Odśwież listę po zamknięciu
                 }
             }
         }
+
 
         private void OpenServiceOrderWindow(object parameter)
         {
@@ -193,9 +196,6 @@ namespace Workshop.ViewModel
             serviceOrderWindow.ShowDialog(); // Wyświetlenie okna modalnego
             LoadServiceOrders(); // Odśwież zgłoszenia po zamknięciu okna
         }
-
-
-
 
         private bool CanEditSelectedCar(object parameter)
         {

@@ -13,7 +13,6 @@ namespace Workshop.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<ServiceOrder> ServiceOrders { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-RJLJ2K5G;Initial Catalog=Workshop; Integrated Security=True; TrustServerCertificate=True;");

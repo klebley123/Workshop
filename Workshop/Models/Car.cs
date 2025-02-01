@@ -14,6 +14,8 @@ namespace Workshop.Models
         public int Year { get; set; }
         public string OwnerName { get; set; }
         public string OwnerLastName { get; set; }
+        public bool IsDeleted { get; set; } = false;
+
         //public DateTime ServiceStartDate { get; set; }
         //public DateTime PlannedEndDate { get; set; }
         //public string ServiceDescription { get; set; }

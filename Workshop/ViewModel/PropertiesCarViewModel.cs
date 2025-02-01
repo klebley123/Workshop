@@ -8,24 +8,30 @@ using System.Windows;
 using Workshop.Command;
 using Workshop.Data;
 using Workshop.Models;
+using Workshop.Services;
+using System.Net.Http;
 
 namespace Workshop.ViewModel
 {
     public class PropertiesCarViewModel : MainViewModel
     {
+        private readonly MainViewModel _mainViewModel;
         public Car PropSelectedCar { get; set; }
 
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
-        public ICommand DeleteCommand { get; }
+        public ICommand DeleteCarCommand { get; }
 
-        public PropertiesCarViewModel(Car car)
+
+        public PropertiesCarViewModel(Car car, MainViewModel mainViewModel)
         {
+            
             PropSelectedCar = car;
+            _mainViewModel = mainViewModel;
 
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
-            DeleteCommand = new RelayCommand(Delete);
+            DeleteCarCommand = new RelayCommand(async () => await DeleteCar());
         }
 
         private void Save(object parameter)
@@ -90,31 +96,34 @@ namespace Workshop.ViewModel
             CloseWindow(parameter);
         }
 
-        private void Delete(object parameter)
+        private async Task DeleteCar()
         {
-            var result = MessageBox.Show("Czy na pewno chcesz usunąć ten rekord?", "Potwierdzenie usunięcia", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            if (PropSelectedCar == null)
             {
-                try
-                {
-                    using (var context = new WorkshopContext())
-                    {
-                        var carToDelete = context.Cars.Find(PropSelectedCar.Id);
-                        if (carToDelete != null)
-                        {
-                            context.Cars.Remove(carToDelete);
-                            context.SaveChanges();
-                            MessageBox.Show("Rekord został usunięty.");
-                        }
-                    }
-                    CloseWindow(parameter);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Wystąpił nie oczekiwany błąd: {ex.Message}");
-                }
+                MessageBox.Show("Nie wybrano samochodu do usunięcia.");
+                return;
+            }
+
+            var result = MessageBox.Show("Czy na pewno chcesz usunąć ten samochód?", "Potwierdzenie", MessageBoxButton.YesNo);
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            try
+            {
+                await _apiService.DeleteCarAsync(PropSelectedCar.Id);
+                MessageBox.Show("Samochód został oznaczony jako usunięty!");
+
+                await _mainViewModel.LoadCarsFromDatabase(); // Teraz działa
+
+                CloseWindow(null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Błąd podczas usuwania: {ex.Message}");
             }
         }
+
+
 
         private void CloseWindow(object parameter)
         {
