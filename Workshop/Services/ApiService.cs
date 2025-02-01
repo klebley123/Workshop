@@ -15,7 +15,7 @@ namespace Workshop.Services
 
         public ApiService()
         {                                                                         //44385
-            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:44384/api/") };
+            _httpClient = new HttpClient { BaseAddress = new Uri("https://localhost:7159/api/") };
         }
 
         public async Task<List<Car>> GetCarsAsync()
