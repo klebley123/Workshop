@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Workshop.ViewModel;
+using Workshop.Views;
 
 namespace Workshop
 {
@@ -24,9 +25,33 @@ namespace Workshop
     {
         public MainWindow()
         {
-            InitializeComponent();
-            ConnectToDatabase();
-            DataContext = new MainViewModel();
+            //var loginWindow = new LoginView();
+            //if (loginWindow.ShowDialog() == true)
+            //{
+            //    Application.Current.Shutdown();
+            //}
+            //InitializeComponent();
+            //ConnectToDatabase();
+            //DataContext = new MainViewModel();
+           
+
+            var loginWindow = new LoginView();
+            bool? loginResult = loginWindow.ShowDialog(); //Pobieramy wynik logowania
+            Console.WriteLine($"Wynik logowania przed sprawdzeniem: {loginResult}");
+            Console.WriteLine($"Wynik logowania: {loginResult}");
+
+            if (loginResult == true) // Jeśli logowanie zakończyło się sukcesem
+            {
+                Console.WriteLine("Logowanie udane! Otwieram MainWindow...");
+                InitializeComponent();
+                ConnectToDatabase();
+                DataContext = new MainViewModel();
+            }
+            else
+            {
+                Console.WriteLine("Logowanie nieudane. Zamykam aplikację...");
+                Application.Current?.Shutdown();  // Zamykamy aplikację, jeśli logowanie nie było udane
+            }
         }
 
         private void ConnectToDatabase()

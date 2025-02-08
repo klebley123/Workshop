@@ -19,7 +19,7 @@ namespace WorkshopWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ServiceOrder>>> GetServiceOrders()
         {
-            return await _context.ServiceOrders.Include(o => o.Car).ToListAsync();
+            return await _context.ServiceOrders.Where(so => !so.IsDeleted).ToListAsync();
         }
 
         [HttpPost]
@@ -30,5 +30,21 @@ namespace WorkshopWebAPI.Controllers
 
             return CreatedAtAction(nameof(GetServiceOrders), new { id = serviceOrder.Id }, serviceOrder);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> SoftDeleteServiceOrder(int id)
+        {
+            var order = await _context.ServiceOrders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            order.IsDeleted = true;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }

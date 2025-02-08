@@ -13,6 +13,8 @@ namespace Workshop.Models
         public DateTime ServiceStartDate { get; set; } // Data rozpoczęcia serwisu
         public DateTime PlannedEndDate { get; set; } // Planowana data zakończenia serwisu
         public string ServiceDescription { get; set; } // Opis czynności serwisowych
+        public bool IsDeleted { get; set; } = false;
+
         public Car Car { get; set; } // Nawigacja do powiązanego samochodu
     }
 }

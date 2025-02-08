@@ -21,10 +21,10 @@ namespace Workshop.Views
     /// </summary>
     public partial class PropertiesCars : Window
     {
-        public PropertiesCars(Car car)
+        public PropertiesCars(Car car, MainViewModel mainViewModel)
         {
             InitializeComponent();
-            DataContext = new PropertiesCarViewModel(car);
+            DataContext = new PropertiesCarViewModel(car, mainViewModel);
         }
     }
 }
