@@ -10,6 +10,7 @@ using Workshop.Data;
 using Workshop.Models;
 using Workshop.Services;
 using System.Net.Http;
+using System.Reflection.Metadata;
 
 namespace Workshop.ViewModel
 {
@@ -31,7 +32,7 @@ namespace Workshop.ViewModel
 
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
-            DeleteCarCommand = new RelayCommand(async () => await DeleteCar());
+            DeleteCarCommand = new RelayCommand(async (parameter) => await DeleteCar(parameter));
         }
 
         private void Save(object parameter)
@@ -96,7 +97,7 @@ namespace Workshop.ViewModel
             CloseWindow(parameter);
         }
 
-        private async Task DeleteCar()
+        private async Task DeleteCar(object parameter)
         {
             if (PropSelectedCar == null)
             {
@@ -115,7 +116,7 @@ namespace Workshop.ViewModel
 
                 await _mainViewModel.LoadCarsFromDatabase(); // Teraz działa
 
-                CloseWindow(null);
+                CloseWindow(parameter);
             }
             catch (Exception ex)
             {

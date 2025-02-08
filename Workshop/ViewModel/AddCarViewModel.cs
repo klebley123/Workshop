@@ -107,17 +107,6 @@ namespace Workshop.ViewModel
                 return;
             }
 
-            //if (ServiceStartDate < DateTime.Now.Date)
-            //{
-            //    MessageBox.Show("Pole 'Data rozpoczęcia serwisu' nie może być wcześniejsze niż dzisiejsza data.");
-            //    return;
-            //}
-            //if (PlannedEndDate < ServiceStartDate.Date)
-            //{
-            //    MessageBox.Show("Pole 'Planowana data zakończenia' musi być późniejsze niż 'Data rozpoczęcia serwisu'.");
-            //    return;
-            //}
-
             try
             {
                 using (var context = new WorkshopContext())
@@ -129,9 +118,6 @@ namespace Workshop.ViewModel
                         Year = this.Year,
                         OwnerName = this.OwnerName,
                         OwnerLastName = this.OwnerLastName,
-                        //ServiceStartDate = this.ServiceStartDate,
-                        //PlannedEndDate = this.PlannedEndDate,
-                        //ServiceDescription = this.ServiceDescription,
                     };
 
                     context.Cars.Add(newCar);
