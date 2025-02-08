@@ -58,20 +58,19 @@ namespace Workshop.ViewModel
                 string token = await _apiService.LoginAsync(Username, Password);
                 MessageBox.Show("Zalogowano pomyślnie!");
 
-                // Otwórz główne okno
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-
-                // Zamknij tylko aktywne okno logowania
+                // Zamknij `LoginView` z wynikiem `true`
                 Window loginWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w is LoginView);
-                loginWindow?.Close();
+                if (loginWindow != null)
+                {
+                    loginWindow.DialogResult = true; // ✅ Informujemy `ShowDialog()`, że logowanie było udane
+                    Console.WriteLine("DialogResult ustawione na TRUE");
+                    loginWindow.Close();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Błąd logowania: {ex.Message}");
             }
         }
-
-
     }
 }
