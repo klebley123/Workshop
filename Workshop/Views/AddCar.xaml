@@ -25,7 +25,7 @@
         <Label Content="Imię     :" Grid.Row="3" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Label Content="Nazwisko :" Grid.Row="4" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Button Content="Zamknij" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="10,10,10,10" Grid.Column="0" Grid.Row="8" FontSize="30"/>
-        <Button Content="Dodaj" Command="{Binding AddCarCommand}" Margin="10,10,10,10" Grid.Column="1" Grid.Row="8" FontSize="30" Width="250" HorizontalAlignment="Right"/>
+        <Button Content="Dodaj" Command="{Binding AddCarCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="10,10,10,10" Grid.Column="1" Grid.Row="8" FontSize="30" Width="250" HorizontalAlignment="Right"/>
         <TextBox x:Name="brand" Grid.Column="1" Grid.Row="0" FontSize="20" Text="{Binding Brand, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="model" Grid.Column="1" Grid.Row="1" FontSize="20" Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="year" Grid.Column="1" Grid.Row="2" FontSize="20" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}"/>
